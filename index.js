@@ -31,7 +31,7 @@ app.post('/', (req, res) => {
 
         const valid = arrayLabels.every(label => label.title === nameLabel)
         if (!valid){
-            res.status(200).json({ msg: `NÃO HÁ LABEL DE ${nameLabel}`});
+            return res.status(200).json({ msg: `NÃO HÁ LABEL DE ${nameLabel}`});
         }
         console.log('não passou aqui')
         const body = {
