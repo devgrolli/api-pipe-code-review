@@ -9,7 +9,8 @@ const URL_GOOGLE_CHAT = 'https://chat.googleapis.com/v1/spaces/AAAAEelVVHs/messa
 const headersGoogle = { 'Content-Type': 'application/json'}
   
 app.get('/', (req, res) => {
-    console.log('teste', req)
+    console.log('REQUEST', req)
+    console.log('RESPONSE', res)
     const body = {
         cards: [{
             header: {
