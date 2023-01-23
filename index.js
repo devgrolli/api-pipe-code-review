@@ -12,13 +12,13 @@ app.use(express.json())
  
 // app.use(cors(corsOptions))
 
-app.get('/', (res) => {
-    return res.json({message: "Server is up"});
+app.get('/', (resonse) => {
+    return resonse.json({message: "Server is up"});
 })
 
-app.post('/', (req, res) => {
-    const { name, date } = req.body;
-    return res.json({name, date});
+app.post('/', (request, resonse) => {
+    const { name, date } = request.body;
+    return resonse.json({name, date});
 })
 
 app.listen(3333, console.log('listening on port 3333'))
