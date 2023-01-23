@@ -1,19 +1,13 @@
-// require('dotenv').config()
 const express = require('express')
-// const cors = require("cors");
 const app = express()
+const PORT = 3333
 
-// const corsOptions = {
-//     origin: '*',
-//     credentials: true,
-//     optionSuccessStatus: 200,
-//  }
- 
-// app.use(cors(corsOptions))
 app.use(express.json())
 
 app.get('/', (response) => {
-    response.json({msg: 'Bem vindo a nossa API'})
+    return response.json({msg: 'Bem vindo a nossa API'})
 })
 
-app.listen(3333, console.log('listening on port 3333'))
+app.listen(PORT,  () => {
+    console.log(`Server is running on port ${PORT}`);
+});
