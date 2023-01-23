@@ -1,12 +1,18 @@
 const express = require('express');
 const app = express();
-const PORT = 3333
+app.use(express.json());
+const PORT = 444
   
-app.get('/', function (req, res) {
-   res.send({ msg: 'HOLA'});
+app.get('/', (req, res) => {
+    res.status(201).json({ msg: 'HOLA'});
+})
+
+app.post('/', (req, res) => {
+    const { flag } = req.body
+    res.status(201).json({ msg: `Flag GITLAB: ${flag}`});
 })
   
-const server = app.listen(PORT, function () {
-    const port = server.address().port
-   console.log(" Listening : ", port)
+const server = app.listen(PORT, () => {
+   const port = server.address().port
+   console.log("Listening on port: ", port)
 })
