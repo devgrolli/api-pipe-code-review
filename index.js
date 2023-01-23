@@ -13,20 +13,21 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
+    const response_gitlab = req.body
     const body = {
         cards: [{
             header: {
-                title: "TESTE CODE REVIEW",
-                subtitle: "Aqui será mostrado sobre oq será",
+                title: `TESTE CODE REVIEW - Repositório ${response_gitlab.repository.name}`,
+                subtitle: `Branch do Code Review: ${response_gitlab.merge_request.source_branch}`,
                 imageStyle: 'AVATAR'
             },
             sections: [{
                 widgets: [{
                     buttons: [{
                         textButton: {
-                            text: 'ACESSE O LINK DO GITLAB',
+                            text: `ACESSE O LINK DO GITLAB ${response_gitlab.merge_request.source_branch}`,
                             onClick: {
-                                openLink: { url: URL_GOOGLE_CHAT }
+                                openLink: { url: response_gitlab.merge_request.url }
                             }
                         }
                     }]
