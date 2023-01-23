@@ -16,8 +16,9 @@ app.post('/', (req, res) => {
     const arrayLabels = response_gitlab.merge_request.labels
     const nameLabel = 'Code Review'
 
-    if(!Array.isArray(arrayLabels) && arrayLabels.length){
-
+    if(Array.isArray(arrayLabels) && !arrayLabels.length){
+        res.status(202).json({ msg: 'DEU RUIM NO ARRAY'});
+    }else{
         const resutLabels = findLabel(arrayLabels, nameLabel)
         if(!resutLabels){
             res.status(200).json({ msg: `NÃO POSSUI TAG ${nameLabel}`});
@@ -55,9 +56,6 @@ app.post('/', (req, res) => {
         }, (err) => {
             res.status(404).json({ msg: 'Ocorreu algum problema com a requisição par ao Google Chat', erro: err});
         });
-
-    }else{
-        res.status(202).json({ msg: 'DEU RUIM NO ARRAY'});
     }
 })
 
