@@ -2,6 +2,7 @@
 const express = require('express')
 // const cors = require("cors");
 const app = express()
+app.use(express.json())
 
 // const corsOptions = {
 //     origin: '*',
@@ -10,11 +11,14 @@ const app = express()
 //  }
  
 // app.use(cors(corsOptions))
-// app.use(express.json())
-
-app.listen(5001, () => console.log('api running on port 5001'))
 
 app.get('/', (res) => {
-    res.status(200).json({msg: 'Bem vindo a nossa API'})
+    return res.json({message: "Server is up"});
 })
 
+app.post('/', (req, res) => {
+    const { name, date } = req.body;
+    return res.json({name, date});
+})
+
+app.listen(3333, console.log('listening on port 3333'))
