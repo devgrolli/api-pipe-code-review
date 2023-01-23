@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
     const response_gitlab = req.body
 
-    console.log('LABEL', response_gitlab.target.labels)
+    console.log('LABEL', response_gitlab.source.labels)
     const body = {
         cards: [{
             header: {
