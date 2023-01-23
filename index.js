@@ -16,6 +16,11 @@ app.post('/', (req, res) => {
     const arrayLabels = response_gitlab.merge_request.labels
     const nameLabel = 'Code Review'
 
+
+    console.log('É ARRAY?', Array.isArray(arrayLabels))
+    console.log('ESTÁ VAZIO?', !arrayLabels.length)
+    console.log('array', arrayLabels)
+
     if(Array.isArray(arrayLabels) && !arrayLabels.length){
         res.status(202).json({ msg: 'DEU RUIM NO ARRAY'});
     }else{
