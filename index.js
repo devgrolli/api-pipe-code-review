@@ -14,8 +14,13 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
     const response_gitlab = req.body
+    const labels = response_gitlab.merge_request.labels
 
-    console.log('LABEL', response_gitlab.merge_request.labels)
+
+    labels.map((nome, i) => {
+        console.log('[forEach]', nome, i);
+    })
+
     const body = {
         cards: [{
             header: {
@@ -44,7 +49,6 @@ app.post('/', (req, res) => {
         headers: headersGoogle,
         data: body
     }).then((response) => {
-        // console.log('RESPONSE', res.body)
         console.log('DEU BOM', response.body);
     }, (error) => {
         console.log('ERROR', error);
