@@ -9,6 +9,38 @@ const URL_GOOGLE_CHAT = 'https://chat.googleapis.com/v1/spaces/AAAAEelVVHs/messa
 const headersGoogle = { 'Content-Type': 'application/json'}
   
 app.get('/', (req, res) => {
+    const body = {
+        cards: [{
+            header: {
+                title: "TESTE CODE REVIEW",
+                subtitle: "Aqui será mostrado sobre oq será",
+                imageStyle: 'AVATAR'
+            },
+            sections: [{
+                widgets: [{
+                    buttons: [{
+                        textButton: {
+                            text: 'ACESSE O LINK DO GITLAB',
+                            onClick: {
+                                openLink: { url: URL_GOOGLE_CHAT }
+                            }
+                        }
+                    }]
+                }]
+            }]
+        }]
+    }
+
+    axios({
+        method: 'post',
+        url: URL_GOOGLE_CHAT,
+        headers: headersGoogle,
+        data: body
+    }).then((response) => {
+        console.log('DEU BOM', response.body);
+    }, (error) => {
+        console.log('ERROR', error);
+    });
     res.status(201).json({ msg: 'HOLA'});
 })
 
