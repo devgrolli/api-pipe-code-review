@@ -1,6 +1,5 @@
-const axios = require('axios')
 const express = require('express');
-
+const axios = require('axios')
 const app = express();
 app.use(express.json());
 
@@ -14,20 +13,16 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
     const response_gitlab = req.body
-    const labels = response_gitlab.merge_request.labels
+    const arrayLabels = response_gitlab.merge_request.labels
+    const nameLabel = 'Code Review'
 
-    console.log(labels)
-    // labels.map((label, i) => {
-    //     console.log('[forEach]', label, i);
-    //     label
-    // })
-    console.log('É ARRAY', Array.isArray(labels))
-    console.log('TÁ VAZIO?', !labels.length)
+    if(!Array.isArray(arrayLabels) && arrayLabels.length){
 
-    if(Array.isArray(labels) && !labels.length){
-        res.status(404).json({ msg: 'DEU RUIM NO ARRAY'});
-    }else{
-        console.log(labels.title.includes('Code Review'))
+        const resutLabels = findLabel(arrayLabels, nameLabel)
+        if(!resutLabels){
+            res.status(200).json({ msg: `NÃO POSSUI TAG ${nameLabel}`});
+        }
+        console.log('não passou aqui')
         const body = {
             cards: [{
                 header: {
@@ -55,15 +50,25 @@ app.post('/', (req, res) => {
             url: URL_GOOGLE_CHAT,
             headers: headersGoogle,
             data: body
-        }).then((response) => {
-            console.log('DEU BOM', response.body);
-        }, (error) => {
-            console.log('ERROR', error);
+        }).then((res) => {
+            res.status(201).json({ msg: 'Alerta de Code Review enviado para o Google Chat', info: res});
+        }, (err) => {
+            res.status(404).json({ msg: 'Ocorreu algum problema com a requisição par ao Google Chat', erro: err});
         });
 
-        res.status(201).json({ msg: 'Alerta de Code Review enviado para o Google Chat'});
+    }else{
+        res.status(202).json({ msg: 'DEU RUIM NO ARRAY'});
     }
 })
+
+const findLabel = (map, val) => {
+    for (let [k, v] of map) {
+      if (v === val) { 
+        return true; 
+      }
+    }  
+    return false;
+}
   
 const server = app.listen(PORT, () => {
    const port = server.address().port
