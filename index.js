@@ -22,41 +22,45 @@ app.post('/', (req, res) => {
     //     label
     // })
 
-    const body = {
-        cards: [{
-            header: {
-                title: `TESTE CODE REVIEW - Repositório ${response_gitlab.repository.name}`,
-                subtitle: `Branch do Code Review: ${response_gitlab.merge_request.source_branch}`,
-                imageStyle: 'AVATAR'
-            },
-            sections: [{
-                widgets: [{
-                    buttons: [{
-                        textButton: {
-                            text: `ACESSE O LINK DO GITLAB ${response_gitlab.merge_request.source_branch}`,
-                            onClick: {
-                                openLink: { url: response_gitlab.merge_request.url }
+    if(Array.isArray(labels) && !labels.length){
+        res.status(404).json({ msg: 'DEU RUIM NO ARRAY'});
+    }else{
+        console.log(labels.title.includes('Code Review'))
+        const body = {
+            cards: [{
+                header: {
+                    title: `TESTE CODE REVIEW - Repositório ${response_gitlab.repository.name}`,
+                    subtitle: `Branch do Code Review: ${response_gitlab.merge_request.source_branch}`,
+                    imageStyle: 'AVATAR'
+                },
+                sections: [{
+                    widgets: [{
+                        buttons: [{
+                            textButton: {
+                                text: `LINK CODE REVIEW - ${response_gitlab.merge_request.source_branch}`,
+                                onClick: {
+                                    openLink: { url: response_gitlab.merge_request.url }
+                                }
                             }
-                        }
+                        }]
                     }]
                 }]
             }]
-        }]
+        }
+
+        axios({
+            method: 'post',
+            url: URL_GOOGLE_CHAT,
+            headers: headersGoogle,
+            data: body
+        }).then((response) => {
+            console.log('DEU BOM', response.body);
+        }, (error) => {
+            console.log('ERROR', error);
+        });
+
+        res.status(201).json({ msg: 'Alerta de Code Review enviado para o Google Chat'});
     }
-
-    axios({
-        method: 'post',
-        url: URL_GOOGLE_CHAT,
-        headers: headersGoogle,
-        data: body
-    }).then((response) => {
-        console.log('DEU BOM', response.body);
-    }, (error) => {
-        console.log('ERROR', error);
-    });
-
-    const { flag } = req.body
-    res.status(201).json({ msg: `Flag GITLAB: ${flag}`});
 })
   
 const server = app.listen(PORT, () => {
