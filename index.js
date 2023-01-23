@@ -61,8 +61,8 @@ app.post('/', (req, res) => {
             url: URL_GOOGLE_CHAT,
             headers: headersGoogle,
             data: body
-        }).then((res) => {
-            res.status(201).json({ msg: 'Alerta de Code Review enviado para o Google Chat', info: res});
+        }).then((response) => {
+            res.status(201).json({ msg: 'Alerta de Code Review enviado para o Google Chat', info: response});
         }, (err) => {
             res.status(404).json({ msg: 'Ocorreu algum problema com a requisição par ao Google Chat', erro: err});
         });
