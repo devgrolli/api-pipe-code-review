@@ -1,16 +1,16 @@
-require('dotenv').config()
+// require('dotenv').config()
 const express = require('express')
-const cors = require("cors");
+// const cors = require("cors");
 const app = express()
 
-const corsOptions = {
-    origin: '*',
-    credentials: true,
-    optionSuccessStatus: 200,
- }
+// const corsOptions = {
+//     origin: '*',
+//     credentials: true,
+//     optionSuccessStatus: 200,
+//  }
  
-app.use(cors(corsOptions))
-app.use(express.json())
+// app.use(cors(corsOptions))
+// app.use(express.json())
 
 app.listen(5001, () => console.log('api running on port 5001'))
 
