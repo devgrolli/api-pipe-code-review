@@ -16,10 +16,11 @@ app.post('/', (req, res) => {
     const response_gitlab = req.body
     const labels = response_gitlab.merge_request.labels
 
-
-    labels.map((nome, i) => {
-        console.log('[forEach]', nome, i);
-    })
+    console.log(labels)
+    // labels.map((label, i) => {
+    //     console.log('[forEach]', label, i);
+    //     label
+    // })
 
     const body = {
         cards: [{
