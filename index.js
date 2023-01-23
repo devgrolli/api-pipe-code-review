@@ -6,6 +6,15 @@ app.use(express.json());
 const PORT = 3333
 const URL_GOOGLE_CHAT = 'https://chat.googleapis.com/v1/spaces/AAAAEelVVHs/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=nMVGivkRRQF__ZzWA-HESQNPMR0iFTB1uuYeQdHZwDM%3D'
 const headersGoogle = { 'Content-Type': 'application/json'}
+
+const findLabel = (map, val) => {
+    for (let [k, v] of map) {
+      if (v === val) { 
+        return true; 
+      }
+    }  
+    return false;
+}
   
 app.get('/', (req, res) => {
     res.status(201).json({ msg: 'HOLA'});
@@ -63,15 +72,6 @@ app.post('/', (req, res) => {
         });
     }
 })
-
-const findLabel = (map, val) => {
-    for (let [k, v] of map) {
-      if (v === val) { 
-        return true; 
-      }
-    }  
-    return false;
-}
   
 const server = app.listen(PORT, () => {
    const port = server.address().port
