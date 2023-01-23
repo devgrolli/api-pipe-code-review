@@ -9,8 +9,6 @@ const URL_GOOGLE_CHAT = 'https://chat.googleapis.com/v1/spaces/AAAAEelVVHs/messa
 const headersGoogle = { 'Content-Type': 'application/json'}
   
 app.get('/', (req, res) => {
-    console.log('REQUEST', req)
-    console.log('RESPONSE', res)
     const body = {
         cards: [{
             header: {
@@ -39,6 +37,8 @@ app.get('/', (req, res) => {
         headers: headersGoogle,
         data: body
     }).then((response) => {
+        console.log('REQUEST', req)
+        console.log('RESPONSE', res)
         console.log('DEU BOM', response.body);
     }, (error) => {
         console.log('ERROR', error);
