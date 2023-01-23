@@ -25,6 +25,7 @@ app.post('/', (req, res) => {
         res.status(202).json({ msg: 'DEU RUIM NO ARRAY'});
     }else{
         const valid = arrayLabels.every(label => label.title === nameLabel)
+        console.log(valid)
         if (!valid){
             return res.status(200).json({ msg: `Não há label de ${nameLabel} no Merge Request`});
         }
