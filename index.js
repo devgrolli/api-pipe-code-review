@@ -21,6 +21,8 @@ app.post('/', (req, res) => {
     //     console.log('[forEach]', label, i);
     //     label
     // })
+    console.log('É ARRAY', Array.isArray(labels))
+    console.log('TÁ VAZIO?', !labels.length)
 
     if(Array.isArray(labels) && !labels.length){
         res.status(404).json({ msg: 'DEU RUIM NO ARRAY'});
