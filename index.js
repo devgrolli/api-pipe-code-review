@@ -21,31 +21,39 @@ app.post('/', (req, res) => {
     const nameLabel = 'Code Review'
 
 
-    console.log('É ARRAY?', Array.isArray(arrayLabels))
-    console.log('ESTÁ VAZIO?', !arrayLabels.length)
-    console.log('array', arrayLabels)
-
     if(Array.isArray(arrayLabels) && !arrayLabels.length){
         res.status(202).json({ msg: 'DEU RUIM NO ARRAY'});
     }else{
-
         const valid = arrayLabels.every(label => label.title === nameLabel)
         if (!valid){
-            return res.status(200).json({ msg: `NÃO HÁ LABEL DE ${nameLabel}`});
+            return res.status(200).json({ msg: `Não há label de ${nameLabel} no Merge Request`});
         }
-        console.log('não passou aqui')
+
+
         const body = {
             cards: [{
                 header: {
-                    title: `TESTE CODE REVIEW - Repositório ${response_gitlab.repository.name}`,
-                    subtitle: `Branch do Code Review: ${response_gitlab.merge_request.source_branch}`,
+                    title: `Aberto Code Review - ${response_gitlab.repository.name}`,
+                    subtitle: 'Acompanhe o code review por aqui',
                     imageStyle: 'AVATAR'
                 },
-                sections: [{
+                sections: [
+                    {
+                        widgets: [{
+                            textParagraph: {
+                              text: `
+                                <b>Usuário: <font color=\"#66CDAA\">Usuário: ${response_gitlab.user.name}</font></b>
+
+                                <b>Branch</b>: ${response_gitlab.merge_request.source_branch}
+                              `
+                            }
+                        }]
+                    },
+                    {
                     widgets: [{
                         buttons: [{
                             textButton: {
-                                text: `LINK CODE REVIEW - ${response_gitlab.merge_request.source_branch}`,
+                                text: `LINK CODE REVIEW`,
                                 onClick: {
                                     openLink: { url: response_gitlab.merge_request.url }
                                 }
