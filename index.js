@@ -14,6 +14,8 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
     const response_gitlab = req.body
+
+    console.log('LABEL', response_gitlab.target.labels)
     const body = {
         cards: [{
             header: {
@@ -42,7 +44,6 @@ app.post('/', (req, res) => {
         headers: headersGoogle,
         data: body
     }).then((response) => {
-        console.log('REQUEST', req.body)
         // console.log('RESPONSE', res.body)
         console.log('DEU BOM', response.body);
     }, (error) => {
