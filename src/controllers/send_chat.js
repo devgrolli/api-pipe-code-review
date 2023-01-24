@@ -4,7 +4,7 @@ const template = require('../template/google_chat')
 const URL_GOOGLE_CHAT = 'https://chat.googleapis.com/v1/spaces/AAAAEelVVHs/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=nMVGivkRRQF__ZzWA-HESQNPMR0iFTB1uuYeQdHZwDM%3D'
 // const URL_GOOGLE_CHAT = process.env.URL_GOOGLE_CHAT
 
-exports.sendAlertCodeReview = async (res, response_gitlab) => {
+exports.sendAlertCodeReview = (res, response_gitlab) => {
     axios({
         method: 'post',
         url: URL_GOOGLE_CHAT,

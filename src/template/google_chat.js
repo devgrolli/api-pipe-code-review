@@ -1,5 +1,5 @@
 exports.createTemplateGoogleChat = (response_gitlab) => {
-    const body = {
+    return {
         cards: [{
             header: {
                 title: `Aberto Code Review - ${response_gitlab.repository.name}`,
@@ -19,18 +19,18 @@ exports.createTemplateGoogleChat = (response_gitlab) => {
                     }]
                 },
                 {
-                widgets: [{
-                    buttons: [{
-                        textButton: {
-                            text: `ACESSAR MR`,
-                            onClick: {
-                                openLink: { url: response_gitlab.merge_request.url }
+                    widgets: [{
+                        buttons: [{
+                            textButton: {
+                                text: `ACESSAR MR`,
+                                onClick: {
+                                    openLink: { url: response_gitlab.merge_request.url }
+                                }
                             }
-                        }
+                        }]
                     }]
-                }]
-            }]
+                }
+            ]
         }]
     }
-    return body;
 }
