@@ -2,10 +2,12 @@ const controller = require('../controllers/send_chat')
 
 module.exports = (app) => {
     app.get('/', (req, res) => {
+        console.log('CHEGOU AQUI')
         res.status(201).json({ msg: 'Bem vindo ao envio pro Google Chat'});
     })
     
     app.post('/', (req, res) => {
+        console.log('CHEGOU')
         const nameLabel = 'Aguardando Code Review'
         const response_gitlab = req.body
         const arrayLabels = response_gitlab.merge_request.labels
