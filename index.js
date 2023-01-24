@@ -20,14 +20,12 @@ app.post('/', (req, res) => {
     const arrayLabels = response_gitlab.merge_request.labels
     const nameLabel = 'Code Review'
 
-
     if(Array.isArray(arrayLabels) && !arrayLabels.length){
         res.status(202).json({ msg: 'DEU RUIM NO ARRAY'});
     }else{
-        const valid = arrayLabels.every(label => label.title == nameLabel)
-        console.log(arrayLabels)
-        console.log(nameLabel)
-        if (!valid){
+        const valid = arrayLabels.find(item => item.title === nameLabel);
+
+        if (!valid == null){
             return res.status(200).json({ msg: `Não há label de ${nameLabel} no Merge Request`});
         }
 
