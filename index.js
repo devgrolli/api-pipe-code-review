@@ -34,6 +34,7 @@ app.post('/', (req, res) => {
                 header: {
                     title: `Aberto Code Review - ${response_gitlab.repository.name}`,
                     subtitle: 'Acompanhe o code review por aqui',
+                    imageUrl: 'https://cdn0.iconfinder.com/data/icons/designer-skills/128/node-js-512.png',
                     imageStyle: 'AVATAR'
                 },
                 sections: [
@@ -41,7 +42,7 @@ app.post('/', (req, res) => {
                         widgets: [{
                             textParagraph: {
                               text: `
-                                <b>Usuário: <font color=\"#66CDAA\">Usuário: ${response_gitlab.user.name}</font></b>
+                                <b>Usuário: <font color=\"#66CDAA\"> ${response_gitlab.user.name}</font></b>
 
                                 <b>Branch</b>: ${response_gitlab.merge_request.source_branch}
                               `
@@ -52,7 +53,7 @@ app.post('/', (req, res) => {
                     widgets: [{
                         buttons: [{
                             textButton: {
-                                text: `LINK CODE REVIEW`,
+                                text: `ACESSAR MR`,
                                 onClick: {
                                     openLink: { url: response_gitlab.merge_request.url }
                                 }
